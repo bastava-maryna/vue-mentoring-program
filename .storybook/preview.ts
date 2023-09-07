@@ -1,4 +1,5 @@
-import type { Preview } from "@storybook/vue3";
+import type { Preview } from "@storybook/vue3"
+import "../src/assets/tailwind.css"
 
 const preview: Preview = {
   parameters: {
@@ -6,10 +7,31 @@ const preview: Preview = {
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/,
-      },
+        date: /Date$/
+      }
     },
-  },
-};
+    backgrounds: {
+      default: "white",
+      values: [
+        {
+          name: "netflix-dark-gray",
+          value: "#232323"
+        },
+        {
+          name: "white",
+          value: "#FFFFFF"
+        },
+        {
+          name: "black",
+          value: "#000000"
+        },
+        {
+          name: "netflix-light-green",
+          value: "#A1E66F"
+        }
+      ]
+    }
+  }
+}
 
-export default preview;
+export default preview
