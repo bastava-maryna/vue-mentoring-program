@@ -20,12 +20,13 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
-  (e: "click", id: number): void
+  //(e: "click", value: string): void
+  (e: "click"): void
 }>()
 
-const onClick = () => {
-  emit("click", 1)
-}
+// const onClick = () => {
+//   emit("click", value)
+// }
 </script>
 
 <template>
@@ -38,7 +39,7 @@ const onClick = () => {
       [`h-16 text-2xl px-12 w-60`]: size === 'large'
     }"
     v-bind="$attrs"
-    @click="onClick"
+    @click="emit('click')"
   >
     {{ label }}
   </button>

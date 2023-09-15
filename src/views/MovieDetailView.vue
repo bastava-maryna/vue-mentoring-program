@@ -9,12 +9,17 @@ import MovieDetail from "@/components/MovieDetail.vue"
 <template>
   <div class="bg-netflix-dark-gray">
     <AppHeader>
-      <IconSearch
-        width="30"
-        class="mt-4"
-      />
+      <router-link
+        class="link link-hover"
+        :to="`/`"
+      >
+        <IconSearch
+          width="30"
+          class="mt-4"
+        />
+      </router-link>
     </AppHeader>
-    <MovieDetail />
+    <MovieDetail :movie="movie"/>
   </div>
   <MovieCardList />
   <AppFooter />

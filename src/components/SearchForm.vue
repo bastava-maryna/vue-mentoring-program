@@ -1,7 +1,19 @@
 <script setup lang="ts">
+import { ref } from "vue"
+
 import AInput from "@/components/AInput.vue"
-import SearchButton from "@/components/SearchButton.vue"
 import ALabel from "@/components/ALabel.vue"
+import AButton from "@/components/AButton.vue"
+
+const searchQuery = ref("")
+
+const emit = defineEmits<{
+  (event: "search", value: string): void
+}>()
+
+const handleSearchQuery = () => {
+  emit("search", searchQuery.value)
+}
 </script>
 
 <template>
@@ -11,12 +23,18 @@ import ALabel from "@/components/ALabel.vue"
   <div class="flex mt-10 mx-24">
     <div class="grow">
       <AInput
+        v-model:input-value="searchQuery"
         placeholder="Search"
         class="bg-netflix-dark-gray h-14 text-xl w-full text-white border-netflix-dark-gray"
+        @enter-clicked="handleSearchQuery"
       />
     </div>
     <div class="flex-none">
-      <SearchButton />
+      <AButton
+        label="SEARCH"
+        class="mx-2 mb-2"
+        @click="handleSearchQuery"
+      />
     </div>
   </div>
 </template>

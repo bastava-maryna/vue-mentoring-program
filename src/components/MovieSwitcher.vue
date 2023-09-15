@@ -31,10 +31,17 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
-  (e: "click", id: number): void
+  (e: "filter", clicked: string): void
 }>()
 
 const clicked = ref(props.labelLeft)
+
+const handleClicked = (val) => {
+  clicked.value = val
+  emit("filter", clicked)
+}
+// @click="clicked = props.labelLeft"
+// @click="clicked = props.labelRight"
 </script>
 
 <template>
@@ -53,14 +60,14 @@ const clicked = ref(props.labelLeft)
       class="rounded-r-none mx-0 tracking-widest w-auto"
       size="small"
       :color="clicked === props.labelLeft ? 'netflix-red' : 'netflix-middle-gray'"
-      @click="clicked = props.labelLeft"
+      @click="handleClicked((clicked = props.labelLeft))"
     />
     <AButton
       :label="props.labelRight"
       class="rounded-l-none mx-0 tracking-widest w-auto"
       size="small"
       :color="clicked === props.labelRight ? 'netflix-red' : 'netflix-middle-gray'"
-      @click="clicked = props.labelRight"
+      @click="handleClicked((clicked = props.labelRight))"
     />
   </div>
 </template>

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { PropType } from "vue"
+
 import uniqueId from "lodash/uniqueId"
 
 defineOptions({
@@ -8,18 +9,18 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    label?: string
+    label?: string | boolean
     placeholder: string
-    modelValue: string | number
+    inputValue: string | number
     id: string
     type?: string
     errors?: PropType<string[]>
     withIcon?: boolean
   }>(),
   {
-    label: "",
+    label: false,
     placeholder: "",
-    modelValue: "",
+    inputValue: "",
     id: uniqueId("input"),
     type: "text",
     errors: () => [],
@@ -28,11 +29,12 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
-  (event: "update:modelValue", value: string): void
+  (event: "update:inputValue", value: string): void
+  (event: "enterClicked"): void
 }>()
 
-const updateInput = (event: Event) => {
-  emit("update:modelValue", (event.target as HTMLInputElement).value)
+const enterClicked = () => {
+  emit("enterClicked")
 }
 </script>
 
@@ -49,7 +51,7 @@ const updateInput = (event: Event) => {
       <input
         :id="id"
         ref="input"
-        :value="modelValue"
+        :value="inputValue"
         v-bind="$attrs"
         class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         :class="{
@@ -58,8 +60,8 @@ const updateInput = (event: Event) => {
         }"
         :type="type"
         :placeholder="placeholder"
-        @update="updateInput"
-        @keyup.enter="updateInput"
+        @input="$emit('update:inputValue', $event.target.value)"
+        @keyup.enter="enterClicked"
       />
       <div
         v-if="errors.length"
@@ -81,6 +83,4 @@ const emit = defineEmits<{
 keyup: [value: string]
 update: [value: string]
 }>()
-@update:modelValue="emit('update', $event.target.value)"
-@keyup.enter="emit('keyup', ($event.target as HTMLInputElement).value)"
 -->

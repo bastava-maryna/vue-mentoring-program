@@ -79,20 +79,20 @@ npx tailwindcss init -p
 
 1. Add the paths to all of your template files in your tailwind.config.js file.
    `/** @type {import('tailwindcss').Config} */
-   export default {
-   content: [
-   "./index.html",
-   "./src/**/*.{vue,js,ts,jsx,tsx}",
-   ],
-   theme: {
-   extend: {},
-   },
-   plugins: [],
-   }`
+export default {
+content: [
+"./index.html",
+"./src/**/*.{vue,js,ts,jsx,tsx}",
+],
+theme: {
+extend: {},
+},
+plugins: [],
+}`
 2. Add the @tailwind directives for each of Tailwind’s layers to ./src/style.css file.
    `@tailwind base;
- @tailwind components;
- @tailwind utilities;`
+@tailwind components;
+@tailwind utilities;`
 3. Delete `import "./assets/main.css"` from ./src/main.ts and add `import "./assets/tailwind.scc"`
 4. Instead @storybook/addon-postcss install @storybook/addon-styling(although it also depreceted)
 
@@ -166,3 +166,29 @@ npm run build
 ```sh
 npm run test:unit
 ```
+
+### Firebase and VueFire
+
+```sh
+npm npm install vuefire firebase
+```
+
+1. Get firebaseConfig file after setting the project, database and register web app at
+   https://console.firebase.google.com/ and put it in `/firebase/init.js` file
+2. Initialise Firestore database by adding to `/firebase/init.js`:
+   `import { getFirestore } from "firebase/firestore"; 
+// init firestore service
+const db = getFirestore(firebaseApp)
+`
+3. Create reusable database references
+   `export const movieRef = collection(db, 'movies')`
+4. Install the VueFire Vue plugin:
+   Modify to `main.ts` file:
+   `import { VueFire, VueFireAuth } from 'vuefire'
+import { firebaseApp } from  "./firebase"
+app.use(router).use(VueFire, {
+ firebaseApp,
+ modules: [
+ VueFireAuth(),
+ ],
+ })`
