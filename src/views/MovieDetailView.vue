@@ -19,7 +19,7 @@ import MovieDetail from "@/components/MovieDetail.vue"
         />
       </router-link>
     </AppHeader>
-    <MovieDetail :movie="movie"/>
+    <MovieDetail :movie="movie" />
   </div>
   <MovieCardList />
   <AppFooter />

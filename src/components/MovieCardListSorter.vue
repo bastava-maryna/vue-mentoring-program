@@ -20,7 +20,6 @@ const emit = defineEmits<{
 }>()
 
 const handleFilter = (val) => {
-  console.log("sorter in sorter: ", sorter.value)
   sorter.value = val.value.toLowerCase()
   emit("sortBy", sorter.value)
 }

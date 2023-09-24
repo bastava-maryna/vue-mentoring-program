@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import { computed, ref } from "vue"
-import { get } from "@vueuse/core"
+import { computed } from "vue"
 
-import { useSearchMovies } from "@/composables/useSearch.js"
-import { useSortMovies } from "@/composables/useSort.js"
+import { useSearchMovies } from "@/composables/useSearch"
 
 import type { Movie } from "@/types/movie"
 import movie15 from "@/assets/movie15.json"
@@ -21,25 +19,22 @@ const props = withDefaults(
     movies: Movie[]
     filter?: string
     searchQuery?: string
+    sortBy?: "release date" | "rating"
   }>(),
   {
     movies: movie15,
     filter: "",
-    searchQuery: ""
+    searchQuery: "",
+    sortBy: "release date"
   }
 )
+const emit = defineEmits(["update:sortBy"])
 
 const handleSorter = (val) => {
-  sortBy.value = val.toLowerCase()
+  emit("update:sortBy", val)
 }
 
-const searchedMovies = computed(() =>
-  useSearchMovies(get(props.movies), get(props.filter), get(props.searchQuery))
-)
-
-const sortBy = ref("release date")
-
-const sortedMovies = computed(() => useSortMovies(get(searchedMovies), get(sortBy)))
+const searchedMovies = useSearchMovies(props)
 
 const searchedMoviesLength = computed(() => searchedMovies.value.length)
 </script>
@@ -48,22 +43,18 @@ const searchedMoviesLength = computed(() => searchedMovies.value.length)
   <div class="bg-netflix-dark-gray">
     <MovieCardListSorter
       :found-qty="searchedMoviesLength"
+      :value="sortBy"
       @sort-by="(sorter) => handleSorter(sorter)"
     />
     <div v-if="searchedMoviesLength != 0">
-      <div
-        v-for="movie in sortedMovies.value"
-        :key="movie.id"
-        class="flex flex-wrap flex-row mx-12 items-center"
-      >
-        <div class="basis-1/3 mb-1 flex-grow-0 flex-shrink">
+      <div class="flex flex-wrap flex-row mx-12 items-center">
+        <div
+          v-for="movie in searchedMovies"
+          :key="movie.id"
+          class="basis-1/3 mb-1 flex-grow-0 flex-shrink"
+        >
           <MovieCard :movie="movie" />
         </div>
-        <!--
-       <div class="basis-1/3 mb-1 flex-grow-0 flex-shrink">
-         <MovieCard/>
-       </div>
-       -->
       </div>
     </div>
     <div

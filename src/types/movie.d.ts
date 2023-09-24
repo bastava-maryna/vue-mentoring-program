@@ -10,7 +10,7 @@ export interface Movie {
   countries: string[]
   languages: string[]
   actors: string[]
-  genre: string[]
+  genre: string
   tagline: string
   description: string
   directors: string[]

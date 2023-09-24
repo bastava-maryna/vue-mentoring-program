@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import type { PropType } from "vue"
-
+import { watch } from "vue"
 import uniqueId from "lodash/uniqueId"
 
 defineOptions({
@@ -14,7 +13,7 @@ const props = withDefaults(
     inputValue: string | number
     id: string
     type?: string
-    errors?: PropType<string[]>
+    error?: string
     withIcon?: boolean
   }>(),
   {
@@ -23,7 +22,7 @@ const props = withDefaults(
     inputValue: "",
     id: uniqueId("input"),
     type: "text",
-    errors: () => [],
+    error: "",
     withIcon: false
   }
 )
@@ -36,6 +35,21 @@ const emit = defineEmits<{
 const enterClicked = () => {
   emit("enterClicked")
 }
+
+const validateInput = (value) => {
+  const pattern = /^[A-Za-z0-9]+$/
+  if (!pattern.test(value)) {
+    console.log("error")
+    this.error = "Only letters and numbers are allowed. Please retype."
+  }
+}
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    validateInput(value)
+  }
+)
 </script>
 
 <template>
@@ -55,7 +69,7 @@ const enterClicked = () => {
         v-bind="$attrs"
         class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         :class="{
-          [`border-red-400`]: props.errors.length,
+          [`border-red-400`]: props.error,
           [`pl-12`]: props.withIcon
         }"
         :type="type"
@@ -64,10 +78,10 @@ const enterClicked = () => {
         @keyup.enter="enterClicked"
       />
       <div
-        v-if="errors.length"
+        v-if="props.error"
         class="text-red-600 mt-1 text-sm"
       >
-        <!--{{ props.errors[0] }}-->
+        {{ props.error }}
       </div>
       <div
         v-if="withIcon"
@@ -78,9 +92,3 @@ const enterClicked = () => {
     </div>
   </div>
 </template>
-<!--
-const emit = defineEmits<{
-keyup: [value: string]
-update: [value: string]
-}>()
--->

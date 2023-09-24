@@ -9,6 +9,7 @@ import MovieSearch from "@/components/MovieSwitcher.vue"
 
 const filter = ref("title")
 const search = ref("")
+const sortBy = ref("release date")
 const handleSearchQuery = (searchQuery) => {
   search.value = searchQuery.toLowerCase()
 }
@@ -33,6 +34,7 @@ const handleFilter = (val) => {
     />
   </div>
   <MovieCardList
+    v-model:sort-by="sortBy"
     :search-query="search"
     :filter="filter"
   />
