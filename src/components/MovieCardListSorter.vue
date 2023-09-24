@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { ref } from "vue"
-
 import AText from "@/components/AText.vue"
 import MovieSorter from "@/components/MovieSwitcher.vue"
+import { useSearchStore } from "@/store/SearchStore"
 
 const props = withDefaults(
   defineProps<{
@@ -13,16 +12,10 @@ const props = withDefaults(
   }
 )
 
-const sorter = ref("release date")
-
-const emit = defineEmits<{
-  (event: "sortBy", value: string): void
-}>()
+const { setSortBy } = useSearchStore()
 
 const handleFilter = (val) => {
-  console.log("sorter in sorter: ", sorter.value)
-  sorter.value = val.value.toLowerCase()
-  emit("sortBy", sorter.value)
+  setSortBy(val.value.toLowerCase())
 }
 </script>
 

@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import { ref } from "vue"
-
 import SearchForm from "@/components/SearchForm.vue"
 import AppHeader from "@/components/AppHeader.vue"
 import AppFooter from "@/components/AppFooter.vue"
 import MovieCardList from "@/components/MovieCardList.vue"
 import MovieSearch from "@/components/MovieSwitcher.vue"
+import { useSearchStore } from "@/store/SearchStore"
+import { useMoviesStore } from "@/store/MoviesStore"
+import { storeToRefs } from "pinia"
+import { useSearchMovies } from "@/composables/useSearch"
 
-const filter = ref("title")
-const search = ref("")
-const handleSearchQuery = (searchQuery) => {
-  search.value = searchQuery.toLowerCase()
-}
+const { sortBy, filter, search } = storeToRefs(useSearchStore())
+const { setFilter } = useSearchStore()
+const { movies } = useMoviesStore()
 const handleFilter = (val) => {
-  filter.value = val.value.toLowerCase()
+  setFilter(val.value.toLowerCase())
 }
+
+const searchedMovies = useSearchMovies(movies, filter, search, sortBy)
 </script>
 
 <template>
@@ -23,7 +25,7 @@ const handleFilter = (val) => {
     style="background-image: url('src/assets/images/movie-bg-1.jpg')"
   >
     <AppHeader />
-    <SearchForm @search="(searchQuery) => handleSearchQuery(searchQuery)" />
+    <SearchForm />
     <MovieSearch
       title="SEARCH BY"
       label-left="TITLE"
@@ -33,8 +35,10 @@ const handleFilter = (val) => {
     />
   </div>
   <MovieCardList
+    v-model:sort-by="sortBy"
     :search-query="search"
     :filter="filter"
+    :movies="searchedMovies"
   />
   <AppFooter />
 </template>

@@ -155,6 +155,26 @@ svg4VuePlugin(),
 3. controls:
    font-size, fill, stroke, width
 
+### vite-plugin-svg4vue
+
+```sh
+npm install pinia
+```
+
+1. Create a pinia instance (the root store) and pass it to the app as a plugin:
+
+```
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import App from './App.vue'
+
+const pinia = createPinia()
+const app = createApp(App)
+
+app.use(pinia)
+app.mount('#app')
+```
+
 ### Type-Check, Compile and Minify for Production
 
 ```sh

@@ -3,11 +3,14 @@ import MovieImage from "@/components/MovieImage.vue"
 import MovieDetailBody from "@/components/MovieDetailBody.vue"
 import type { Movie } from "@/types/movie"
 
-interface Props {
-  movie: Movie
-}
-
-const props = defineProps<Props>()
+const props = withDefaults(
+  defineProps<{
+    movie: Movie
+  }>(),
+  {
+    movie: null
+  }
+)
 </script>
 
 <template>

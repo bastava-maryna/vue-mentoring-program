@@ -4,15 +4,15 @@ import { ref } from "vue"
 import AInput from "@/components/AInput.vue"
 import ALabel from "@/components/ALabel.vue"
 import AButton from "@/components/AButton.vue"
+import { storeToRefs } from "pinia"
+import { useSearchStore } from "@/store/SearchStore"
 
-const searchQuery = ref("")
-
-const emit = defineEmits<{
-  (event: "search", value: string): void
-}>()
+const { search } = storeToRefs(useSearchStore())
+const { setSearch } = useSearchStore()
+const searchQuery = ref(search.value)
 
 const handleSearchQuery = () => {
-  emit("search", searchQuery.value)
+  setSearch(searchQuery.value.toLowerCase())
 }
 </script>
 

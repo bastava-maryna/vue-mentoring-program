@@ -1,9 +1,26 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router"
+
 import AppHeader from "@/components/AppHeader.vue"
 import AppFooter from "@/components/AppFooter.vue"
 import MovieCardList from "@/components/MovieCardList.vue"
 import IconSearch from "@/components/IconSearch.vue"
 import MovieDetail from "@/components/MovieDetail.vue"
+
+import { useMoviesStore } from "@/store/MoviesStore"
+import { useSearchStore } from "@/store/SearchStore"
+import { storeToRefs } from "pinia"
+import { useSearchMovies } from "@/composables/useSearch"
+
+const route = useRoute()
+
+const { movies, getMovie } = useMoviesStore()
+
+const { sortBy, filter, search } = storeToRefs(useSearchStore())
+
+const movie = getMovie(route.params.movieId)
+
+const searchedMovies = useSearchMovies(movies, filter, search, sortBy)
 </script>
 
 <template>
@@ -19,8 +36,13 @@ import MovieDetail from "@/components/MovieDetail.vue"
         />
       </router-link>
     </AppHeader>
-    <MovieDetail :movie="movie"/>
+    <MovieDetail :movie="movie" />
   </div>
-  <MovieCardList />
+  <MovieCardList
+    v-model:sort-by="sortBy"
+    :search-query="search"
+    :filter="filter"
+    :movies="searchedMovies"
+  />
   <AppFooter />
 </template>

@@ -40,8 +40,6 @@ const handleClicked = (val) => {
   clicked.value = val
   emit("filter", clicked)
 }
-// @click="clicked = props.labelLeft"
-// @click="clicked = props.labelRight"
 </script>
 
 <template>
