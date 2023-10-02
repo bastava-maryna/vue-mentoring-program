@@ -6,7 +6,8 @@
     "src/**/*.vue",
     "src/**/*.ts",
     "src/**/*.d.ts",
-    "src/**/*.json"
+    "src/**/*.json",
+    "tests/*.spec.ts"
   ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
@@ -15,6 +16,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["vite/client"],
+    //"types": ["vitest/globals"]
   }
 }

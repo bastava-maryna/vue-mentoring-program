@@ -1,18 +1,18 @@
-import { ref, computed, type Ref, type ComputedRef } from "vue"
-import { get, set } from "@vueuse/core"
-import { defineStore } from "pinia"
+import {ref, computed, type Ref, type ComputedRef} from "vue"
+import {get, set} from "@vueuse/core"
+import {defineStore} from "pinia"
 
 import movie15 from "@/assets/movie15.json"
-import type { Movie } from "@/types/movie"
+import type {Movie} from "@/types/movie"
 
 export const useMoviesStore = defineStore("movies-store", () => {
-  const movies: Ref<Movie[]> = ref(movie15)
-  const setMovies: void = (newMovies) => set(movies, newMovies)
+    const movies:Ref<Movie[]>= ref( movie15 as Movie[])
+    const setMovies = (newMovies: Movie[]) => set(movies, newMovies)
 
-  const getMovie: ComputedRef<Movie> = (movieId) =>
-    computed(() => get(movies).filter((movie) => movie.id === movieId)[0])
+    const getMovie: ComputedRef<Movie> = (movieId: string) =>
+        computed(() => get(movies).filter((movie:Movie):boolean => movie.id === movieId)[0])
 
-  const moviesSize: ComputedRef<number> = computed(() => get(movies).length)
+    const moviesSize: ComputedRef<number> = computed(() => get(movies).length)
 
-  return { movies, setMovies, getMovie, moviesSize }
+    return {movies, setMovies, getMovie, moviesSize}
 })
