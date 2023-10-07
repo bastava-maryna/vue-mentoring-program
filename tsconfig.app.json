@@ -17,7 +17,7 @@
       "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["vite/client"],
+    "types": ["vite/client"]
     //"types": ["vitest/globals"]
   }
 }

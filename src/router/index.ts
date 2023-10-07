@@ -1,13 +1,12 @@
-import { createRouter, createWebHistory } from "vue-router"
+import { createRouter, createWebHistory, type Router } from "vue-router"
 import MainView from "@/views/MainView.vue"
 
 export const RouteNames = {
   HOME: "home",
-  DETAIL: "detail",
+  DETAIL: "detail"
 }
 
-
-const router = createRouter({
+const router: Router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {

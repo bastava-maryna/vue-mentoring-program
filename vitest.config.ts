@@ -13,7 +13,7 @@ export default mergeConfig(
       transformMode: {
         web: [/\.[jt]sx$/]
       },
-      globals:true
+      globals: true
     }
   })
 )

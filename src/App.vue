@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import { onMounted } from "vue"
 import { RouterView } from "vue-router"
+import { useMoviesStore } from "@/store/MoviesStore"
+
+const moviesStore = useMoviesStore()
+
+onMounted(() => {
+  moviesStore.initMovies()
+})
 </script>
 
 <template>
