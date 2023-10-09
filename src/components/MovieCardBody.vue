@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import type { PropType } from "vue"
 import AText from "@/components/AText.vue"
 
 const props = withDefaults(
   defineProps<{
     title: string
     year: number
-    genre: PropType<string[]>
+    genre: string
   }>(),
   {}
 )

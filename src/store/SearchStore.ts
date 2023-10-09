@@ -7,9 +7,9 @@ export const useSearchStore = defineStore("search-store", () => {
   const filter: Ref<string> = ref("title")
   const search: Ref<string> = ref("")
 
-  const setSortBy = (newSortBy) => set(sortBy, newSortBy)
-  const setFilter = (newFilter) => set(filter, newFilter)
-  const setSearch = (newSearch) => set(search, newSearch)
+  const setSortBy = (newSortBy:string) => set(sortBy, newSortBy)
+  const setFilter = (newFilter:string) => set(filter, newFilter)
+  const setSearch = (newSearch:string) => set(search, newSearch)
 
   return { sortBy, setSortBy, search, setSearch, filter, setFilter }
 })

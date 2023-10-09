@@ -9,14 +9,14 @@ export const useSearchMovies = (
   sortBy: Ref<string>
 ): ComputedRef<Movie[]> =>
   computed(() => {
-    let temp: Movie[] = movies
+    let temp: Movie[] = get(movies)
 
     if (get(searchQuery) && get(filter) === "title") {
-      temp = movies.filter((movie: Movie) => {
+      temp = get(movies).filter((movie: Movie) => {
         return movie.title.toLowerCase().includes(get(searchQuery))
       })
     } else if (get(searchQuery) && get(filter) === "genre") {
-      temp = movies.filter((movie: Movie) => {
+      temp = get(movies).filter((movie: Movie) => {
         return movie.genre.toLowerCase().includes(get(searchQuery))
       })
     }

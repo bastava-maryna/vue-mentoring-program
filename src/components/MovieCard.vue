@@ -7,7 +7,7 @@ interface Props {
   movie: Movie
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>

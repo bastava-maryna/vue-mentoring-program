@@ -42,7 +42,7 @@ npm install --save-dev eslint eslint-plugin-vue @vue/eslint-config-typescript @r
 
 `@rushstack/eslint-patch` in order to work around a known limitation in ESLint.
 
-1. Create a `.eslintrc.js` file in your projects root directory
+1. Create a `.eslintrc.cjs` file in your projects root directory
 2. Add at the beginning of file:
    `require("@rushstack/eslint-patch/modern-module-resolution")`
 3. Add required configuration options.
@@ -59,7 +59,7 @@ npm install --save-dev eslint-config-prettier prettier
 
 `eslint-config-prettier` to turn off all rules that are unnecessary or might conflict with Prettier.
 
-1. Make modifications to .eslintrc.js:
+1. Make modifications to .eslintrc.cjs:
    make sure to put `"prettier"` last to `"extends"` section, so it gets the chance to override other configs.
 2. Create a `.prettierrc.js` file and add rules to override the defaults 3. Add script in package.json:
    `"format": "prettier .  --write"`
@@ -70,7 +70,7 @@ npm install --save-dev eslint-config-prettier prettier
 
 ### Tailwindcss
 
-Install tailwindcss and its peer dependencies, then generate your tailwind.config.js and postcss.config.js files.
+Install tailwindcss and its peer dependencies, then generate your tailwind.config.js and postcss.config.cjs files.
 
 ```sh
 npm install --save-dev tailwindcss postcss autoprefixer
@@ -181,7 +181,43 @@ app.mount('#app')
 npm run build
 ```
 
+## Testing
+
+### Cypress [Cypress](https://docs.cypress.io/guides/component-testing/vue/overview#Vue-with-Vite)
+Fast, easy and reliable testing for anything that runs in a browser.
+1. Add Cypress to the project
+```sh
+npm install cypress --save-dev
+```
+2. Add to scripts
+`"cypress:open":"cypress open"`
+3. Open Cypress to ,configure Cypress using Launchpad. 
+The Launchpad will scaffold out a set of configuration files appropriate to your chosen testing type.
+`cypress.config.js|ts` file will be created.
+`npm run cypress:open`
+
+### Jest and Test Utils
+1. Add Jest and Test Utils to the project
+```sh
+npm install --save-dev jest ts-jest @types/jest @vue/vue3-jest @vue/test-utils@next
+```
+ts-jest - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript.
+2. Add to scripts
+   `"test": "jest src"`
+3. Create jest.config.js file:
+`module.exports = {
+   moduleFileExtensions: ['js', 'ts', 'json', 'vue'],
+   transform: {
+   '^.+\\.ts$': 'ts-jest',
+   '^.+\\.vue$': 'vue-jest',
+   },
+   }`
+                  
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
+To test with pinia:
+```sh
+npm install @pinia/testing --save
+```
 
 ```sh
 npm run test:unit

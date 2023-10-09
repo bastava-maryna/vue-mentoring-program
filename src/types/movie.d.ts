@@ -4,16 +4,16 @@ export interface Movie {
   rating: string
   year: number
   users_rating: number
-  votes: number
+  votes: string
   metascore: number
   img_url: string
-  countries: string[]
-  languages: string[]
-  actors: string[]
-  genre: string[]
+  countries: string
+  languages: string
+  actors: string
+  genre: string
   tagline: string
   description: string
-  directors: string[]
+  directors: string
   runtime: string
   imdb_url: string
 }
