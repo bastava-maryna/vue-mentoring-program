@@ -2,7 +2,6 @@
 import AText from "@/components/AText.vue"
 import MovieDetailBodyRating from "@/components/MovieDetailBodyRating.vue"
 import MovieDetailBodyIStats from "@/components/MovieDetailBodyIStats.vue"
-import { PropType } from "vue"
 
 const props = withDefaults(
   defineProps<{
@@ -11,7 +10,7 @@ const props = withDefaults(
     year: number
     runtime: string
     description: string
-    genre: PropType<string[]>
+    genre: string
   }>(),
   {}
 )
@@ -20,11 +19,11 @@ const props = withDefaults(
 <template>
   <div class="flex flex-col">
     <div class="mx-9 flex text-5xl text-white h-12 items-center tracking-wider">
-      <AText class="mr-5"> {{ props.title }} </AText>
+      <AText class="mr-5"> {{ props.title }}</AText>
       <MovieDetailBodyRating :value="props.rating" />
     </div>
 
-    <AText class="mx-9 my-4 text-base text-white/75 tracking-widest"> {{ props.genre }} </AText>
+    <AText class="mx-9 my-4 text-base text-white/75 tracking-widest"> {{ props.genre }}</AText>
     <div class="mx-9 flex h-12 items-end tracking-widest font-light">
       <MovieDetailBodyIStats
         :value="props.year"

@@ -11,7 +11,7 @@ import { useSearchMovies } from "@/composables/useSearch"
 
 const { sortBy, filter, search } = storeToRefs(useSearchStore())
 const { setFilter } = useSearchStore()
-const { movies } = useMoviesStore()
+const { movies } = storeToRefs(useMoviesStore())
 const handleFilter = (val) => {
   setFilter(val.value.toLowerCase())
 }

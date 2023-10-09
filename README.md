@@ -61,7 +61,7 @@ npm install --save-dev eslint-config-prettier prettier
 
 1. Make modifications to .eslintrc.cjs:
    make sure to put `"prettier"` last to `"extends"` section, so it gets the chance to override other configs.
-2. Create a `.prettierrc.js` file and add rules to override the defaults 3. Add script in package.json:
+2. Create a `.prettierrc.cjs` file and add rules to override the defaults 3. Add script in package.json:
    `"format": "prettier .  --write"`
 3. Configure Prettier in WebStorm to use its format function:
    `Settings > Languages & Frameworks > JavaScript > Prettier` (using Automatic ESLint configuration or Manual ESLint configuration).
@@ -184,27 +184,32 @@ npm run build
 ## Testing
 
 ### Cypress [Cypress](https://docs.cypress.io/guides/component-testing/vue/overview#Vue-with-Vite)
+
 Fast, easy and reliable testing for anything that runs in a browser.
+
 1. Add Cypress to the project
+
 ```sh
 npm install cypress --save-dev
 ```
+
 2. Add to scripts
-`"cypress:open":"cypress open"`
-3. Open Cypress to ,configure Cypress using Launchpad. 
-The Launchpad will scaffold out a set of configuration files appropriate to your chosen testing type.
-`cypress.config.js|ts` file will be created.
-`npm run cypress:open`
+   `"cypress:open":"cypress open"`
+3. Open Cypress to ,configure Cypress using Launchpad.
+   The Launchpad will scaffold out a set of configuration files appropriate to your chosen testing type.
+   `cypress.config.js|ts` file will be created.
+   `npm run cypress:open`
 
 ### Jest and Test Utils
+
 1. Add Jest and Test Utils to the project
+
 ```sh
 npm install --save-dev jest ts-jest @types/jest @vue/vue3-jest @vue/test-utils@next
 ```
-ts-jest - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript.
-2. Add to scripts
-   `"test": "jest src"`
-3. Create jest.config.js file:
+
+ts-jest - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript. 2. Add to scripts
+`"test": "jest src"` 3. Create jest.config.js file:
 `module.exports = {
    moduleFileExtensions: ['js', 'ts', 'json', 'vue'],
    transform: {
@@ -212,9 +217,11 @@ ts-jest - A Jest transformer with source map support that lets you use Jest to t
    '^.+\\.vue$': 'vue-jest',
    },
    }`
-                  
+
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
+
 To test with pinia:
+
 ```sh
 npm install @pinia/testing --save
 ```
@@ -230,8 +237,8 @@ npm npm install vuefire firebase
 ```
 
 1. Get firebaseConfig file after setting the project, database and register web app at
-   https://console.firebase.google.com/ and put it in `/firebase/init.js` file
-2. Initialise Firestore database by adding to `/firebase/init.js`:
+   https://console.firebase.google.com/ and put it in `/firebase/init.ts` file
+2. Initialise Firestore database by adding to `/firebase/init.ts`:
    `import { getFirestore } from "firebase/firestore"; 
 // init firestore service
 const db = getFirestore(firebaseApp)

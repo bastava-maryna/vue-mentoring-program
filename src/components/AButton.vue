@@ -22,7 +22,6 @@ const props = withDefaults(
 const emit = defineEmits<{
   (e: "click"): void
 }>()
-
 </script>
 
 <template>

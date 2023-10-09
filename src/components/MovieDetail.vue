@@ -3,9 +3,9 @@ import MovieImage from "@/components/MovieImage.vue"
 import MovieDetailBody from "@/components/MovieDetailBody.vue"
 import type { Movie } from "@/types/movie"
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
-    movie: Movie
+    movie: Movie | null
   }>(),
   {
     movie: null

@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { computed } from "vue"
 
-import movie15 from "@/assets/movie15.json"
-
 import MovieCard from "@/components/MovieCard.vue"
 import MovieCardListSorter from "@/components/MovieCardListSorter.vue"
 import NoFilmsFound from "@/components/NoFilmsFound.vue"
@@ -15,10 +13,10 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    movies: Movie[]
+    movies: Movie[] | null
   }>(),
   {
-    movies: movie15
+    movies: null
   }
 )
 

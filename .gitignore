@@ -32,6 +32,7 @@ out-tsc
 .env.production
 .env.development
 .env.*.local
+.env
 
 # Test
 coverage
