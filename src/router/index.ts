@@ -23,7 +23,7 @@ const router: Router = createRouter({
       //component: () => import("../components/MovieDetail.vue")
       component: () => import("../views/MovieDetailView.vue")
     },
-    { path: '/:pathMatch(.*)*', component: MainView }
+    { path: "/:pathMatch(.*)*", component: () => import("../views/NotFoundView.vue") }
   ]
 })
 

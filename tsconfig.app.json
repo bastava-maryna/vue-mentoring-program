@@ -18,6 +18,5 @@
     },
     "resolveJsonModule": true,
     "types": ["vite/client"]
-    //"types": ["vitest/globals"]
   }
 }
