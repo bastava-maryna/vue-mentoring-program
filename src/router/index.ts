@@ -22,7 +22,8 @@ const router: Router = createRouter({
       // which is lazy-loaded when the route is visited.
       //component: () => import("../components/MovieDetail.vue")
       component: () => import("../views/MovieDetailView.vue")
-    }
+    },
+    { path: '/:pathMatch(.*)*', component: MainView }
   ]
 })
 

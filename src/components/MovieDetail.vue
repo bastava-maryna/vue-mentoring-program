@@ -16,8 +16,8 @@ withDefaults(
 <template>
   <div class="flex mx-12 mt-10 pb-16">
     <MovieImage
-      :src="movie.img_url"
-      :alt="movie.title"
+      :src="movie?.img_url"
+      :alt="movie?.title"
       class="w-72 h-96"
     />
     <MovieDetailBody
