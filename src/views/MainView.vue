@@ -8,12 +8,13 @@ import { useSearchStore } from "@/store/SearchStore"
 import { useMoviesStore } from "@/store/MoviesStore"
 import { storeToRefs } from "pinia"
 import { useSearchMovies } from "@/composables/useSearch"
+import {get} from "@vueuse/core";
 
 const { sortBy, filter, search } = storeToRefs(useSearchStore())
 const { setFilter } = useSearchStore()
 const { movies } = storeToRefs(useMoviesStore())
-const handleFilter = (val) => {
-  setFilter(val.value.toLowerCase())
+const handleFilter = (val:string) => {
+  setFilter(get(val).toLowerCase())
 }
 
 const searchedMovies = useSearchMovies(movies, filter, search, sortBy)
